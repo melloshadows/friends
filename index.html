@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width= device-width, initial-scale = 1.0">
+        <title>heart surgeon</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body{
+                display: flex;
+                gap: 350px;
+                height:100vh;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+            }
+            #heart{
+                font-size: 300px;
+                cursor: pointer;
+                animation-iteration-count: infinite;
+            }
+            #heart:hover{
+
+            }
+            #key{
+                animation-iteration-count: infinite;
+                cursor: pointer;
+                font-size: 150px;
+            }
+
+            #key:hover{
+                text-shadow: 5px 5px 5px yellow;
+                transform: scale(1.05);
+            }
+            #keytext{
+                font-size: 30px;
+                margin-top: 50px;
+            }
+            #hearttext{
+                font-size: 30px;
+                margin-top: 50px;
+                display: none;
+            }
+            @keyframes slowlybigger{
+                from{
+                    transform: scale(1);
+                }
+                to {
+                    transform: scale(3.6);
+                }
+            }
+            .c{
+                animation: slowlybigger 2s;
+                transition: all 1s;
+            } 
+            video{
+                display: none;
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                left: 1%;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <div id="heart" class="animate__animated animate__heartBeat">
+                &#10084;&#65039;
+            </div>
+            <p id="hearttext">open heart</p>
+        </div>
+        <div>
+            <div id="key" class="animate__animated animate__flip">
+                &#128273;
+                
+            </div>
+            <p id="keytext">grap the key</p>
+        </div>
+        <!-- type="audio/mpeg" -->
+        <audio src="aud/key open.mp3" type="audio/mpeg"></audio>
+        <audio src="aud/key taken-[AudioTrimmer.com].mp3" type="audio/mpeg"></audio>
+        <video src="vid/friends.mov"></video>
+        <script>
+            let key = document.getElementById("key")
+            let heart = document.getElementById("heart")
+            let keyp = document.getElementById("keytext")
+            let heartp = document.getElementById("hearttext")
+            let aud = document.querySelectorAll("audio")
+            let vid = document.querySelector("video")
+
+
+            key.addEventListener("click", function(){
+                aud[1].play()
+                key.style.display = "none"
+                keyp.style.display = "none"
+                hearttext.style.display = "block"
+                heart.addEventListener("click", function(){
+                    aud[0].play()
+                    heart.classList.remove("animate__heartBeat")
+                    heart.classList.add("c")
+                    let t = setTimeout(function(){
+                        heart.classList.remove("c")
+                        heart.style.display="none"
+                        hearttext.style.display="none"
+                        document.body.style.backgroundColor = "black"
+                        aud[0].addEventListener("ended", function(){
+                            vid.style.display="block"
+                            vid.play()
+                        })
+                    },1800)
+                   
+                })
+            })
+            
+        </script>
+        
+    </body>
+</html>
